@@ -1,7 +1,5 @@
 package hxlog.logging;
 
-import hxlog.LogBend;
-import hxlog.LogMessage;
 import raven.Raven;
 
 typedef RavenLogOpts = {
