@@ -14,9 +14,13 @@ class LogPipe {
 
 	function run() {
 		var msg = _msg;
-		for (bend in _bends) {
-			bend.bend(msg);
+
+		if (msg.level.check(_filter)) {
+			for (bend in _bends) {
+				bend.bend(msg);
+			}
 		}
+
 		for (pipe in _pipes) {
 			pipe._msg.copyFrom(msg);
 			pipe.run();
