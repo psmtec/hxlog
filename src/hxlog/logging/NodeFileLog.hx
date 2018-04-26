@@ -8,7 +8,11 @@ class NodeFileLog extends LogBend {
 		var path = untyped __js__("require('path');");
 
 		if (!append) {
-			fs.unlinkSync(path.resolve(untyped __js__('__dirname'), filename));
+			try {
+				fs.unlinkSync(path.resolve(untyped __js__('__dirname'), filename));
+			} catch (x: Dynamic) {
+				trace(x);
+			}
 		}
 
 		stream = untyped __js__("fs.createWriteStream(path.resolve(__dirname, filename), { autoClose: true });");
