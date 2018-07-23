@@ -15,10 +15,16 @@ class NodeFileLog extends LogBend {
 			}
 		}
 
-		stream = untyped __js__("fs.createWriteStream(path.resolve(__dirname, filename), { autoClose: true });");
+		try {
+			stream = untyped __js__("fs.createWriteStream(path.resolve(__dirname, filename), { autoClose: true });");
+		} catch (x: Dynamic) {
+			trace(x);
+		}
 	}
 
 	override public function bend( msg: LogMessage ) {
-		stream.write('${msg.text}\n');
+		if (stream != null) {
+			stream.write('${msg.text}\n');
+		}
 	}
 }
